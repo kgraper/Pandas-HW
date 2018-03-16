@@ -98,3 +98,20 @@ district_table['Total Budget'] = district_table['Total Budget'].map("${0:,.2f}".
 district_table['Percent Passing Math'] = district_table['Percent Passing Math'].map("{0:,.2f}%".format)
 district_table['Percent Passing Reading'] = district_table['Percent Passing Reading'].map("{0:,.2f}%".format)
 district_table
+
+#starting the school summary
+schools_df = schools_df.rename(columns = {'size': 'Number of Students'})
+schools_df
+
+#reference point for calculations
+student_school = pd.merge(schools_df, students_df, on = 'school', how = 'outer')
+student_school.head()
+
+#budget per student
+bud_per_student = schools_df['budget']/schools_df['Number of Students']
+bud_per_student
+#adding budget per student to schools_df
+schools_df['Per Student Budget'] = bud_per_student
+schools_df.head()
+
+
